@@ -9,6 +9,8 @@ public class NunScript : MonoBehaviour {
 
 	NavMeshAgent navAgent;
 
+	public GameObject exclamationMark;
+
 	Vector3 destination;
 
 	bool suspects;							//Set to true if heard a noise and hasn't found anything.
@@ -35,6 +37,7 @@ public class NunScript : MonoBehaviour {
 		heardNoise = false;
 		destination = pos1.position;
 		bedLooked = true;
+		exclamationMark.SetActive (false);
 	}
 	
 	// Update is called once per frame
@@ -90,9 +93,9 @@ public class NunScript : MonoBehaviour {
 
 	public void investigateNoise(Vector3 noiseSource)				//Function that makes the nun move towards the last place where a source of noise was detected
 	{
+		exclamationMark.SetActive (true);
+		StartCoroutine (waitExclamation());
 		destination = noiseSource;
-
-
 		navAgent.SetDestination (destination);
 		heardNoise = true;
 
@@ -152,6 +155,12 @@ public class NunScript : MonoBehaviour {
 		}
 
 		return cBed;
+	}
+
+	IEnumerator waitExclamation()
+	{
+		yield return new WaitForSeconds (2f);
+		exclamationMark.SetActive (false);
 	}
 
 }

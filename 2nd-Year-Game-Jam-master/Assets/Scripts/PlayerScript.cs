@@ -20,6 +20,8 @@ public class PlayerScript : MonoBehaviour {
 	bool item_3_Found;
 	bool item_4_Found;
 
+	public GameObject questionMark;
+
 	// Use this for initialization
 	void Start () {
 		search.enabled = false;
@@ -51,16 +53,20 @@ public class PlayerScript : MonoBehaviour {
 			} else if (closestBed != null && !closestBed.GetComponent<BedScript> ().playerBed) {
 			if (!hiding) {
 				hide.text = "Q to hide";
-				search.enabled = true;
+				questionMark.SetActive (true);
+				//search.enabled = true;
 			} else {
 				hide.text = "Left or Right to get out";
-				search.enabled = false;
+				//search.enabled = false;
+				questionMark.SetActive (false);
 			}
 				hide.enabled = true;							//enables UI text when the player is close to a bed
 				playerControl ();
 			} else {
-				search.enabled = false;
+				//search.enabled = false;
 				hide.enabled = false;
+			questionMark.SetActive (true);
+
 			}
 
 		if (item_1_Found && item_2_Found && item_3_Found && item_4_Found) {
@@ -235,5 +241,11 @@ public class PlayerScript : MonoBehaviour {
 	{
 		yield return new WaitForSeconds (0.3f);
 		delay = false;
+	}
+		
+	IEnumerator waitQuestion()
+	{
+		yield return new WaitForSeconds (2f);
+		questionMark.SetActive (false);
 	}
 }
