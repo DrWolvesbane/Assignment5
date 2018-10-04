@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour {
 
@@ -19,6 +20,7 @@ public class PlayerScript : MonoBehaviour {
 	bool item_2_Found;
 	bool item_3_Found;
 	bool item_4_Found;
+    public AudioSource sound;
 
 	public GameObject questionMark;
 
@@ -79,7 +81,7 @@ public class PlayerScript : MonoBehaviour {
 			}
 
 		if (item_1_Found && item_2_Found && item_3_Found && item_4_Found) {
-			print ("Game Ends");
+            SceneManager.LoadScene("Menu");
 		}
 	}
 
@@ -106,6 +108,7 @@ public class PlayerScript : MonoBehaviour {
 	{
 		if (Input.GetKey (KeyCode.E) && !hiding) {											//Button pressed to let player search.
 			searching = true;
+            sound.Play();
 			nunAI.GetComponent<NunScript> ().investigateNoise (transform.position);
 
 			if (closestBed.GetComponent<BedScript> ().anyItems ()) {

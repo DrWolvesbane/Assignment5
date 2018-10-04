@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class NunScript : MonoBehaviour {
 
@@ -126,7 +127,7 @@ public class NunScript : MonoBehaviour {
 			if (closestBed.GetComponent<BedScript> ().bedFilled) {
 				print ("Nun sees filled bed");
 			} else {
-				print ("NUN FINDS EMPTY BED");
+                SceneManager.LoadScene("SampleScene");
 			}
 		}
 		bedWatch.GetComponent<BedWatchScript> ().nextBed ();
