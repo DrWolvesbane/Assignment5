@@ -22,6 +22,8 @@ public class PlayerScript : MonoBehaviour {
 
 	public GameObject questionMark;
 
+	public Animator animator;
+
 	// Use this for initialization
 	void Start () {
 		search.enabled = false;
@@ -30,6 +32,10 @@ public class PlayerScript : MonoBehaviour {
 		hiding = true;
 
 		originalSize = transform.localScale;
+
+
+
+
 	}
 	
 	// Update is called once per frame
@@ -39,6 +45,9 @@ public class PlayerScript : MonoBehaviour {
 		if (!hiding && !searching) {
 			playerMovement ();
 		}
+
+		animator.SetBool ("IsRunning", true);
+	
 
 		closestBed = findClosestBed ();
 
@@ -65,7 +74,7 @@ public class PlayerScript : MonoBehaviour {
 			} else {
 				//search.enabled = false;
 				hide.enabled = false;
-			questionMark.SetActive (true);
+			questionMark.SetActive (false);
 
 			}
 
